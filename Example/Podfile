@@ -2,7 +2,11 @@ use_frameworks!
 
 target 'TBaseKit_Example' do
   pod 'TBaseKit', :path => '../'
-
+  pod 'AMPopTip', '~> 1.5.3'
+  pod 'DZNEmptyDataSet', '~> 1.8.1'
+  pod 'MJRefresh', '~> 3.1.15.3'
+  pod 'SVProgressHUD', '~> 2.2.5'
+  pod 'Masonry', '~> 1.1.0'
   target 'TBaseKit_Tests' do
     inherit! :search_paths
 

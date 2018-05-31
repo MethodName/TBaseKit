@@ -1,0 +1,39 @@
+{
+  "name": "TBaseKit",
+  "version": "0.1.0",
+  "summary": "A short description of TBaseKit.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/methodname@qq.com/TBaseKit",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "methodname@qq.com": "methodname@qq.com"
+  },
+  "source": {
+    "git": "https://github.com/methodname@qq.com/TBaseKit.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "TBaseKit/Classes/**/*",
+  "dependencies": {
+    "AMPopTip": [
+      "~> 1.5.3"
+    ],
+    "DZNEmptyDataSet": [
+      "~> 1.8.1"
+    ],
+    "MJRefresh": [
+      "~> 3.1.15.3"
+    ],
+    "SVProgressHUD": [
+      "~> 2.2.5"
+    ],
+    "Masonry": [
+      "~> 1.1.0"
+    ]
+  }
+}
