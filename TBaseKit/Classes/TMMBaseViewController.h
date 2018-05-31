@@ -25,16 +25,12 @@ typedef NS_ENUM(NSInteger, TMMNoDataType) {
     TMMNoDataTypeWorkingError
 };
 
-
+@property(nonatomic,weak)UITableView *weekTableView;
 
 /**
  是否正在加载（noData使用）
  */
 @property (nonatomic, getter=isLoading) BOOL loading;
-/**
- 弱引用表格（noData使用）
- */
-@property(nonatomic,weak)UITableView *weekTableView;
 /**
  标题（noData使用）
  */
@@ -48,14 +44,7 @@ typedef NS_ENUM(NSInteger, TMMNoDataType) {
  */
 @property(nonatomic,assign)TMMNoDataType noDataType;
 
-/**
- 显示没有数据在tableView上面（没有数据）
- */
--(void)showNoDataAtTableViewFormNoData;
-/**
- 显示没有数据在tableView上面(网络错误)
- */
--(void)showNoDataAtTableViewFormWorkingError;
+
 
 /**
  显示没有数据在tableView上面（没有数据）
@@ -67,28 +56,19 @@ typedef NS_ENUM(NSInteger, TMMNoDataType) {
 -(void)showNoDataAtTableViewFormWorkingErrorWithTableView:(UITableView *)tableView;
 
 
-
-
-
-#pragma mark -遮挡视图
-@property(nonatomic,strong) UIView *shadeView;
-#pragma mark -单击手势
-@property(strong,nonatomic) UITapGestureRecognizer *tapGR;
-#pragma mark -轻扫手势
-@property(strong,nonatomic) UISwipeGestureRecognizer *swipeGR;
-#pragma mark -背景视图是否显示
-@property(nonatomic) BOOL bgViewDisplay;
-#pragma mark -是否push视图
-@property(nonatomic) BOOL isPushVC;
-#pragma mark -网络请求对象
-//@property(nonatomic,strong) ASIFormDataRequest *request;
-
-
-#pragma mark -显示警告消息
+/*
+ 显示警告消息
+ */
 -(void) showInfoMessage:(NSString*)msg;
-#pragma mark -显示成功消息
+
+/*
+ 显示成功消息
+ */
 -(void) showSuccessMessage:(NSString*)msg;
-#pragma mark -显示错误消息
+
+/*
+ 显示错误消息
+ */
 -(void) showErrorMessage:(NSString*)msg;
 
 
@@ -100,12 +80,11 @@ typedef NS_ENUM(NSInteger, TMMNoDataType) {
  @param Identifier 视图标识
  @param name sb名字
  */
--(void) pushViewControllerWithIdentifier:(NSString*) Identifier SbName:(NSString *)name;
-
+-(void)pushViewControllerWithIdentifier:(NSString*) Identifier SbName:(NSString *)name;
 
 
 /**
- AMPopTip弹出动画
+ AMPopTip上面弹出
  
  @param atView 基于视图
  @param text 显示文本
@@ -113,10 +92,30 @@ typedef NS_ENUM(NSInteger, TMMNoDataType) {
  */
 -(void)upShowAMPopTipAtView:(UIView *)atView Text:(NSString *)text PopoverColor:(UIColor *)color;
 
+/**
+  AMPopTip下面弹出
+
+ @param atView 基于的视图
+ @param text 显示文本
+ @param color 颜色
+ */
 -(void)downShowAMPopTipAtView:(UIView *)atView Text:(NSString *)text PopoverColor:(UIColor *)color;
 
--(void)leftShowAMPopTipAtView:(UIView *)atView Text:(NSString *)text PopoverColor:(UIColor *)color;
+/**
+   AMPopTip左边弹出
 
+ @param atView 基于的视图
+ @param text 显示文本
+ @param color 颜色
+ */
+-(void)leftShowAMPopTipAtView:(UIView *)atView Text:(NSString *)text PopoverColor:(UIColor *)color;
+/**
+ AMPopTip右边弹出
+ 
+ @param atView 基于的视图
+ @param text 显示文本
+ @param color 颜色
+ */
 -(void)rightShowAMPopTipAtView:(UIView *)atView Text:(NSString *)text PopoverColor:(UIColor *)color;
 
 

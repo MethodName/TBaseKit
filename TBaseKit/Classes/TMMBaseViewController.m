@@ -12,34 +12,6 @@
 
 @interface TMMBaseViewController ()<DZNEmptyDataSetSource,DZNEmptyDataSetDelegate>
 
-
-/**
- *  侧栏缩放百分比
- */
-@property(nonatomic,assign)CGFloat bfb;
-/**
- *  是否添加了蒙板
- */
-@property(atomic,assign)BOOL isAddShadeView;
-/**
- *  是否添加了侧栏
- */
-@property(nonatomic,assign)BOOL isAddBGView;
-/**
- *  加载中动画图片
- */
-@property(nonatomic,weak)UIImageView *imageview;
-/**
- *  加载中
- */
-@property(nonatomic,weak)UILabel *textLabel;
-
-/**
- *  状态栏底部View
- */
-@property(nonatomic,strong)UIView *statusView;
-
-
 @property(nonatomic,strong)AMPopTip * tipView;
 
 @end
@@ -59,8 +31,6 @@
     //设置navigationBar顶住视图的最上面部分
     self.automaticallyAdjustsScrollViewInsets = NO;
 
-    self.bgViewDisplay = NO;
-    
     //初始化tipView
     self.tipView = [AMPopTip popTip];
     self.tipView.font = [UIFont fontWithName:@"Avenir-Medium" size:12];
@@ -69,55 +39,10 @@
     self.tipView.offset = 15;//中心点偏移位置
     self.tipView.edgeInsets = UIEdgeInsetsMake(0, 10, 0, 10);//内边距
 
-    
-    //遮挡视图
-    self.shadeView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.shadeView.backgroundColor =[UIColor lightGrayColor];
-    self.shadeView.alpha = 0.1;
-
-   
-    
-    self.isAddShadeView = YES;
-    
     //设置自定义的返回按钮
     UIBarButtonItem *item = [[UIBarButtonItem alloc]  initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = item;
     
-}
-
-
-
-/**
- 显示没有数据在tableView上面（没有数据）
- */
--(void)showNoDataAtTableViewFormNoData
-{
-    if (self.weekTableView)
-    {
-        self.noDataTitle = @"没有数据";
-        self.noDataDetail = @"对不起，目前没有数据（点击重试）";
-        self.noDataType = TMMNoDataTypeNoData;
-        self.weekTableView.emptyDataSetSource = self;
-        self.weekTableView.emptyDataSetDelegate = self;
-        [self.weekTableView reloadEmptyDataSet];
-    }
-}
-/**
- 显示没有数据在tableView上面(网络错误)
- */
--(void)showNoDataAtTableViewFormWorkingError
-{
-    if (self.weekTableView)
-    {
-        [self.weekTableView.mj_header endRefreshing];
-        [self.weekTableView.mj_footer endRefreshing];
-        self.noDataTitle = @"网络异常";
-        self.noDataDetail = @"网络好像出现了一下问题，可能是因为网络环境不佳或服务器繁忙（点击重试）";
-        self.noDataType = TMMNoDataTypeWorkingError;
-        self.weekTableView.emptyDataSetSource = self;
-        self.weekTableView.emptyDataSetDelegate = self;
-        [self.weekTableView reloadEmptyDataSet];
-    }
 }
 
 
@@ -245,7 +170,11 @@
 
 
 
-#pragma mark -显示警告消息
+/**
+ 显示警告消息
+ 
+ @param msg 消息
+ */
 -(void) showInfoMessage:(NSString*)msg
 {
 //    NZAlertView *alert = [[NZAlertView alloc] initWithStyle:NZAlertStyleInfo message:msg];
@@ -254,7 +183,11 @@
     [SVProgressHUD showInfoWithStatus:msg];
 }
 
-#pragma mark -显示成功消息
+/**
+ 显示成功消息
+ 
+ @param msg 消息
+ */
 -(void) showSuccessMessage:(NSString*)msg
 {
 //    NZAlertView *alert = [[NZAlertView alloc] initWithStyle:NZAlertStyleSuccess message:msg];
@@ -263,7 +196,12 @@
     [SVProgressHUD showSuccessWithStatus:msg];
 }
 
-#pragma mark -显示错误消息
+
+/**
+ 显示错误消息
+
+ @param msg 消息
+ */
 -(void) showErrorMessage:(NSString*)msg
 {
 //    NZAlertView *alert = [[NZAlertView alloc] initWithStyle:NZAlertStyleError message:msg];
@@ -302,98 +240,6 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
-
-
-#pragma mark -显示加载视图
--(void)ShowLoadingView
-{
-    
-    if (!_imageview)
-    {
-        UIImageView *imageview = [UIImageView new];
-        _imageview = imageview;
-        [self.view addSubview:imageview];
-        NSMutableArray *imageArray = [NSMutableArray new];
-        for (int i =0; i<12; i++)
-        {
-            UIImage *img =[UIImage imageNamed:[NSString stringWithFormat:@"%d",i+1]];
-            [imageArray addObject:img];
-        }
-    
-       // [imageview setClipsToBounds:YES];
-        //[imageview.layer setCornerRadius:10.0];
-        [imageview.layer setShadowColor:[[UIColor blackColor] CGColor]];
-        //imageview.layer.borderWidth = 10;
-        [imageview.layer setShadowOffset:CGSizeMake(0, 3)];
-        [imageview.layer setShadowRadius:3.0f];
-        [imageview.layer setShadowOpacity:0.5];
-        
-        [imageview setAnimationImages:imageArray];
-        [imageview setAnimationRepeatCount:10000];
-        [imageview setAnimationDuration:1.7];
-        [imageview setFrame:CGRectMake(0, 0, DV_W*0.35, DV_W*0.35)];
-        [imageview setCenter:self.view.center];
-        UILabel *textLabel = [UILabel new];
-        [textLabel setText:@"加载中"];
-        [textLabel setTextColor:RGB(144, 144, 144)];
-        _textLabel = textLabel;
-        [textLabel setTextAlignment:NSTextAlignmentCenter];
-        [imageview addSubview:textLabel];
-        [textLabel mas_makeConstraints:^(MASConstraintMaker *make)
-        {
-            make.size.mas_equalTo(CGSizeMake(DV_W*0.3, 20));
-            make.top.equalTo(imageview.mas_top).offset(DV_W*0.05);
-            make.centerX.equalTo(imageview);
-        }];
-        //imageview
-    
-    }
-    
-    [self.view setUserInteractionEnabled:NO];
-    [_imageview setHidden:NO];
-    
-    //放大动画
-    CABasicAnimation *basicAnime=[CABasicAnimation animationWithKeyPath:@"transform.scale"];
-    [basicAnime setFromValue:[NSNumber numberWithFloat:0.1]];
-    [basicAnime setToValue:[NSNumber numberWithFloat:1.0]];
-    [basicAnime setDuration:0.15];
-    [basicAnime setAutoreverses:NO];
-    [basicAnime setRepeatCount:1];
-    basicAnime.fillMode=kCAFillModeForwards;
-    basicAnime.removedOnCompletion = NO;
-    [_imageview.layer addAnimation:basicAnime forKey:@"scale"];
-     [_textLabel.layer addAnimation:basicAnime forKey:@"scale"];
-    [_imageview startAnimating];
-   
-    
-}
-
-
-
-#pragma mark -隐藏加载视图
--(void)hideLoadingView
-{
-    //设置时间为2
-    double delayInSeconds = 0.5;
-    //创建一个调度时间,相对于默认时钟或修改现有的调度时间。
-    dispatch_time_t delayInNanoSeconds =dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    //推迟两纳秒执行
-    dispatch_queue_t concurrentQueue =dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_after(delayInNanoSeconds, concurrentQueue, ^(void)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (self->_imageview)
-            {
-                [self.view setUserInteractionEnabled:YES];
-                [self->_imageview stopAnimating];
-                [self->_imageview setHidden:YES];
-            }
-        });
-    });
-}
-
-
-
 
 
 /*!
