@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'TBaseKit_Example' do
+  pod 'TBaseKit', :path => '../'
+
+  target 'TBaseKit_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
