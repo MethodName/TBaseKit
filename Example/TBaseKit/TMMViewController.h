@@ -6,8 +6,9 @@
 //  Copyright (c) 2018 methodname@qq.com. All rights reserved.
 //
 
-@import UIKit;
+#import "TMMBaseViewController.h"
 
-@interface TMMViewController : UIViewController
+
+@interface TMMViewController : TMMBaseViewController
 
 @end

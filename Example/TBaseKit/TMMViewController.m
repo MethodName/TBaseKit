@@ -7,6 +7,7 @@
 //
 
 #import "TMMViewController.h"
+#import "TMMWkWebViewViewController.h"
 
 @interface TMMViewController ()
 
@@ -17,13 +18,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)click:(id)sender {
+    TMMWkWebViewViewController *webView = [TMMWkWebViewViewController new];
+    webView.webUrl = @"https://blog.methodname.com";
+    [self.navigationController pushViewController:webView animated:YES];
+    
 }
 
 @end

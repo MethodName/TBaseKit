@@ -1,19 +1,19 @@
 {
   "name": "TBaseKit",
-  "version": "0.1.0",
-  "summary": "A short description of TBaseKit.",
+  "version": "0.1.1",
+  "summary": "TBaseKit Methodname基础类组件.",
   "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/methodname@qq.com/TBaseKit",
+  "homepage": "https://github.com/Methodname/TBaseKit",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "methodname@qq.com": "methodname@qq.com"
+    "Methodname": "Methodname"
   },
   "source": {
-    "git": "https://github.com/methodname@qq.com/TBaseKit.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/Methodname/TBaseKit.git",
+    "tag": "0.1.1"
   },
   "platforms": {
     "ios": "8.0"

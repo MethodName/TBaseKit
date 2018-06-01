@@ -13,6 +13,7 @@
 #import "SVProgressHUD.h"
 #import "Masonry.h"
 #import "TMMConfig.h"
+#import "UIViewController+BackButtonHandler.h"
 
 
 
@@ -25,7 +26,7 @@ typedef NS_ENUM(NSInteger, TMMNoDataType) {
     TMMNoDataTypeWorkingError
 };
 
-@property(nonatomic,weak)UITableView *weekTableView;
+
 
 /**
  是否正在加载（noData使用）
@@ -54,6 +55,16 @@ typedef NS_ENUM(NSInteger, TMMNoDataType) {
  显示没有数据在tableView上面(网络错误)
  */
 -(void)showNoDataAtTableViewFormWorkingErrorWithTableView:(UITableView *)tableView;
+
+/**
+ 显示没有数据在ScrollView上面（没有数据）
+ */
+-(void)showNoDataAtTableViewFormNoDataWithScrollView:(UIScrollView*)scrollView;
+/**
+ 显示没有数据在ScrollView上面(网络错误)
+ */
+-(void)showNoDataAtTableViewFormWorkingErrorWithScrollView:(UIScrollView *)scrollView;
+
 
 
 /*

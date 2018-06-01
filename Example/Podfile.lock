@@ -4,7 +4,7 @@ PODS:
   - Masonry (1.1.0)
   - MJRefresh (3.1.15.3)
   - SVProgressHUD (2.2.5)
-  - TBaseKit (0.1.0):
+  - TBaseKit (0.1.1):
     - AMPopTip (~> 1.5.3)
     - DZNEmptyDataSet (~> 1.8.1)
     - Masonry (~> 1.1.0)
@@ -37,7 +37,7 @@ SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  TBaseKit: 61c17408b4194c7a43e8fb4c1b64ad7a336eca4c
+  TBaseKit: 7bd0d51684bd1dc896d3bf8658b830dad1902e5e
 
 PODFILE CHECKSUM: 1361396da56c9349de9465b2e0661f4775289737
 

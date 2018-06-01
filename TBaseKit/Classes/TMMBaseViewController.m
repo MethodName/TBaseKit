@@ -14,6 +14,10 @@
 
 @property(nonatomic,strong)AMPopTip * tipView;
 
+@property(nonatomic,weak)UITableView *weekTableView;
+
+@property(nonatomic,weak)UIScrollView *weekScrollView ;
+
 @end
 
 @implementation TMMBaseViewController
@@ -40,7 +44,7 @@
     self.tipView.edgeInsets = UIEdgeInsetsMake(0, 10, 0, 10);//内边距
 
     //设置自定义的返回按钮
-    UIBarButtonItem *item = [[UIBarButtonItem alloc]  initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]  initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = item;
     
 }
@@ -80,6 +84,40 @@
         [tableView reloadEmptyDataSet];
     }
 }
+
+/**
+ 显示没有数据在ScrollView上面（没有数据）
+ */
+-(void)showNoDataAtTableViewFormNoDataWithScrollView:(UIScrollView*)scrollView{
+    if (scrollView)
+    {
+        self.weekScrollView = scrollView;
+        self.noDataTitle = @"没有数据";
+        self.noDataDetail = @"对不起，链接没有数据！";
+        self.noDataType = TMMNoDataTypeNoData;
+        scrollView.emptyDataSetSource = self;
+        scrollView.emptyDataSetDelegate = self;
+        [scrollView reloadEmptyDataSet];
+    }
+}
+/**
+ 显示没有数据在ScrollView上面(网络错误)
+ */
+-(void)showNoDataAtTableViewFormWorkingErrorWithScrollView:(UIScrollView *)scrollView{
+    if (scrollView)
+    {
+        self.weekScrollView = scrollView;
+        [scrollView.mj_header endRefreshing];
+        [scrollView.mj_footer endRefreshing];
+        self.noDataTitle = @"网络异常";
+        self.noDataDetail = @"网络好像出现了一下问题，可能是因为网络环境不佳或服务器繁忙~";
+        self.noDataType = TMMNoDataTypeWorkingError;
+        scrollView.emptyDataSetSource = self;
+        scrollView.emptyDataSetDelegate = self;
+        [scrollView reloadEmptyDataSet];
+    }
+}
+
 
 /*
  * noData显示内容标题
